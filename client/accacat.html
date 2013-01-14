@@ -1,0 +1,285 @@
+  <head>
+     <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>ACCA Cloud Assessment Tool&tm; 2012</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <style>
+				body {
+					padding-top: 60px;
+					padding-bottom: 40px;
+					margin-left: 40px;
+					margin-right: 40px;
+					font-family: Helvetica;
+					font-size: 13pt;
+					line-height: 1.5em;
+				}
+				img#logo {
+					margin: 30px;
+				}
+				div#preamble {
+					margin-bottom: 20px;
+				}
+				ul, li {
+					list-style: none;
+				}
+				input[type="checkbox"] {
+					margin-right: 10px;
+				}
+				div#considerations {
+					margin-bottom: 20px;
+				}
+				table tr td {
+					padding: 10px;
+					border: 1px solid #dddddd;
+				}
+				table tr td.sel {
+					background-color: #19a59b;
+					color: white;
+				}
+      </style>
+      <script type="text/javascript">
+				var config = {
+					'Access':{
+						'description': 'Generally speaking, the responsibility of a service provider is limited to the service provider’s own network over which he/she yields control. However, with cloud computing, where one of the basic principles is the remote access to the service by the end-user (regardless of who owns the links and network(s) between the user and the service), this concept is challenged. Typically,  “public” Internet access is the standard way to connect to the cloud service. For critical services, a dedicated “private” link (physical or virtual) is required to ensure security and throughput. We highlight three aspects for consideration.<br/><br/>1)	For public access, the cloud service provider should clearly describe available service levels on his/her own network.<br/><br/>2)	For public access, the user has to check and reach separate agreements with other network access providers in the chain.<br/><br/>3)	For private access, there will be an organization responsible for this dedicated connectivity, which also controls the path between the user and the cloud provider. In this case, SLA requirements can be specified and possibly agreed upon.',
+						'parameters': {
+							'Access': 'This parameter measures the type of access. L1: Access through public Internet. L2: a) Enhanced availability public Internet access. B) Private, i.e. dedicated link access, e.g. through VPN and other methods. L3: enhanced public access or on-demand private access.',
+							'Availability': 'Indicates the “guaranteed” level of uptime of the network access. Scalability: Capability to increase and decrease user’s access bandwidth based on actual capacity demand.',
+							'Reliability': 'Reliability reflects the ability to rapidly detect and recover from link failures. This parameter cannot be assessed in the case of public internet access (i.e. best effort) since there is no organization involved in the business relation between cloud user and provider. In case of “private access”, this parameter would be relevant for certain types of connection.',
+							'Quality of Service': 'Similar to the “Reliability” parameter above, the Quality of Service (QoS) parameter is difficult to assess for public access, as it is on a “best effort” basis. The QoS parameters reflect the features, which influence the quality of delivery of a service. The values of the parameters are according to standard’s definitions (here 3GPP) with respect to certain use cases. The levels reflect the increasing requirements with respect to real time experience.',
+							'Delay': 'is the commitment to end-to-end latency. Packet loss: a guarantee to deliver customer packets, expressed as the ratio of undelivered packets to total number of customer packets received by the network. Service class: allows priorities to be differentiated and data flows to be shaped for comparable services (non-mission critical, mission critical, real time).'
+						}
+					},
+					'Data Center Basics':{
+						'description':'Data Center physical infrastructure. The level of reliability of a cloud service provider may also be gauged based on the data center or geographic zone on which its infrastructure is located. The various tiers of data center types from which a cloud service is hosted have been used to map the parameters for the data center category. The horizontal axis represents the primary data center that hosts the cloud service.  The vertical axis represent the secondary data center that would offer redundancy to the cloud service being offered.<br/><br/>Level 4: This is the highest level for clouds and can be considered as the most robust and least prone for failures. This cloud is hosted primarily in a Tier 4 data center and backed up by either a Tier 4 or Tier 3 data center.<br/><br/>Level 3: This cloud is hosted in two Tier 3 data centers OR a combination of Tier 4 and Tier 2 data centers.<br/><br/>Level 2: This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.<br/><br/>Level 1: This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.<br/><br/>Data Center Tiers are nothing but standardized methodology published by the Uptime Institute to evaluate the quality and reliability of a data centers server hosting ability. This rating system has four levels starting with Tier 1 as the data center with the most basic requirements and ends with Tier 4 offering the highest availability.',
+						'parameters': {
+							'Tier 1 Data Centers': 'have non-redundant capacity components and a single, non-redundant uplink to the server guaranteeing 99.671% availability.',
+							'Tier 2 Data Centers': 'have redundant capacity components and a single, non-redundant uplink to the server guaranteeing 99.749% availability.',
+							'Tier 3 Data Centers': 'are concurrently maintainable data centers with dual-powered equipment and multiple independent up-link to the server guaranteeing 99.982% availability.',
+							'Tier 4 Data Centers': 'are fault tolerant data centers with dual-powered equipment, continuous cooling systems and multiple, independent and physically isolated systems that provide redundant capacity components and multiple, independent, active uplinks to the server guaranteeing 99.995% availability.',
+						}
+					},
+					'Certification and Compliance':{
+						'description':'Thirteen criteria have been identified as being representative of a wide range of applications from various industries. Some represent legal requirements for compliance with global standards, others are process or IT oriented. By clarifying which ones are supported by a cloud provider, users can be relieved of doing their own assessments.',
+						'parameters': {
+							'PCI':'Payment card industry (PCI) compliance is adherence to a set of specific security Standards that were developed to protect card information during and after a financial transaction. PCI compliance is required by all card brands.',
+							'SAS 70':'Defines the standards an auditor must employ in order to assess the contracted internal controls of service organization, e.g. hosted data centers. SSAE16 is a newly introduced optional add on for higher standards.',
+							'ISO 9000':'A series of standards, developed and published by the International Organization for Standardization that define, establish, and maintain an effective quality assurance system for manufacturing and service industries.',
+							'ISO 27001/27002':'The objective of this pair of standards is to provide a model for establishing, implementing, operating, monitoring, reviewing, maintaining, and improving an Information Security Management System.',
+							'EN 16001':'Gives recommendations and guidance on energy management systems. It is designed to help improve energy efficiency by outlining how to implement processes that reduce greenhouse gas emissions. It enables the development of an energy policy and set objectives for the management system in line with legal and regulatory requirements.',
+							'ISO 50xxx':'establishes a framework to manage energy for industrial plants; commercial, institutional, or governmental facilities; or entire organizations. Targeting broad applicability across national economic sectors, it is estimated that the standard could influence up to 60% of the world’s energy use. ',
+							'ISO 50001:2011':'specifies requirements for establishing, implementing, maintaining and improving an energy management system, whose purpose is to enable an organization to follow a systematic approach in achieving continual improvement of energy performance, including energy efficiency, energy use and consumption',
+							'Uptime':'The time during which a machine or piece of equipment is operating or can be operated. ',
+							'HIPAA':'Health Insurance Portability and Accountability Act of 1996.SW vendor certification: Validates the integrity of commercial software products. It indicates the competence and ability of the provider to operate or offer any third party SW.',
+							'Legal obligations of provider':'Providers are obliged to follow legal obligations imposed on them according to the jurisdictions they operate in. Since this may impact the user, who may not even be aware of it, the proposal is to “advertise” these proactively.',
+							'Software security patch process':'The provider is requested to update offer with respect to SW security leaks. This may have impact on the user in requires an appropriate, well defined interaction.',
+							'ISO/IEC 20000':'The provider indicates that they have followed the standardized methods of IT service management, particularly 20000-1 and 20000-2 in revisions from 2011 and 2012 respectively.'
+						}
+					},
+					'Support':{
+						'description':'NIST characterizes cloud computing as a "ubiquitous" and "on demand self-service" that can be rapidly provisioned and released "with minimal management effort or service provider interaction." Enterprises, big and small, will still require support from the cloud service provider, especially for business critical services.  This is an aspect that has to be considered in the context of business continuity.',
+						'parameters': {
+							'Customer support':'Methods and capabilities available for how a user can interact with the service provider. L1: Any relevant interaction through portal. L2: Human interaction possible through service desk. L3: application architecture and performance engineering support. L4: providing troubling shooting support for customer SW.',
+							'Service responsiveness':'Time it takes for the service provider to respond to calls or customer inquiries. L1: 24/7, customer can call all around the clock. L2: Customer request accepted with in 20s. L4: Customer will immediately reach the relevant service agent. ',
+							'Service escalation':'The levels of escalation provided to customer for proper trouble handling.',
+							'Monitoring, audit and management':'Cloud implies “self-service” and “ubiquitous”. Therefore, the user needs to be able to monitor and manage the behavior of the deployed user objects at any point in time from any location. L1: Permanent access to monitor and manage the user’s objects. L2: Enhanced by incident management of all services of the provider. L4: Provider assisted monitoring.',
+							'MTTR':'mean time to repair is the time it takes for service provider to correct reported faults or incidents concerning services acquired by user. L1: 4 hours. L3: 2 hours.',
+							'Change management support':'An acquired service is neither static nor unchanged at all times, it may need internal repairs, upgrades, etc. This impacts the behavior of the user’s service or application. L1: Well defined change management for service provider’s objects. L3: User can request changes.',
+							'Incident response time':'Maximum time it takes for service provider to react and act on Priority 1 incidents  (an event where a service/application is not working or accessible). L1: 30 minutes; L3: 15 minutes.',
+							'Service training':'Structured training and transfer of know-how is important for businesses.'
+						}
+					},
+					'Interoperability':{
+						'description':'Interoperability reflects the possibility to aligning IT hardware and software systems with the help of open standards and interfaces facilitate communications and the exchange of data. In the context of cloud computing, interoperability describes the level of cooperation capability a cloud service can reach with other cloud services.<br/><br/>The higher the level of cooperation, the more cost efficient a business process can be established leveraging cloud services from various providers.<br/><br/>This category together with the “life cycle” and the “compliance” categories address the operational aspects when utilizing cloud services and, therefore, have impact on the user’s operating expenses.<br/><br/>Note: Portability (i.e. the requirement to be able to run software on more than one computer system) is not explicitly addressed in this framework. Nonetheless, in the context of cloud computing, interoperability parameters help to support portability.',
+						'parameters':{
+							'Download format':'This represents the format of the objects to be transferred into the provider’s infrastructure. L2: DMTF [2] has developed a standard format called “open virtualization format” (OVF) which eases the federation across several offerings.',
+							'API':'L1: The programmatic interfaces to request and monitor resources, to deploy and manage applications, mirror the feature differentiation as well as the fast innovation cycles of the service offerings. L3: Standardized API will reduce complexity and cost on the user side whenever several cloud services have to be combined or utilized.',
+							'Access device':'L1: Vertically integrated service solutions may benefit from specialized or customized access devices. L2:  For consuming any application as a service, standard methods for access are needed (“open client”). L3: For anywhere (e.g. mobile) and any device (e.g. BYOD) access a fully open access (any browser) is needed. ',
+							'Life cycle':'The user needs to integrate the requested services into the IT management processes and applications/services. L3: DMTF developed recommendation [3] allowing consistent life cycle management of different services.',
+							'Monitoring data':'Any applications deployed in IaaS or PaaS environments must be monitored and managed by the user. L3: For business critical applications a comprehensive set of data (and appropriate monitoring capabilities) should be provided in standardized formats to enable import in user’s monitoring tools. ',
+							'IDM (Identity Management)':'Service providers must have a way of handling the identity of the user and the user must integrate the IDM of the outsourced service into their IT infrastructure. L2: There are many ways to address IDM.   For interoperability reason an IDM system based on available standards is recommended. ',
+							'Virtualization environment management':'The user may need to integrate the requested resources into their IT management processes (especially for IaaS). L2: DMTF developed recommendation allowing consistent integration of several services.'
+						}
+					},
+					'Security':{
+						'description':'Security currently is one of the hottest topics in the cloud-computing ecosystem.  Virtually all stakeholders, including governments, have identified the need to provide guidance and regulation. This has also been recognized by ACCA, which has responded by forming a working group dedicated to cloud security issues. In the context of the CAT, we limit this category to aspects that would have an immediate impact on the interaction between user and provider or application and resources.<br/><br/>We recommend also to consult the Cloud Security Association’s (CSA) guidelines for an in depth understanding of this topic. National regulations have to be considered as well, which are not addressed here.',
+						'parameters':{
+							'Authentication':'Level 1: Standard methods to authenticate the portal as well as the API access by a user. L3: For mission and business critical use cases the advanced two-factor authentication is required.',
+							'User account logging':'Self serve access and maintenance requires logging of user access and user actions for tracking. L2: Added capability of logging management activities on requested resources and other actions.',
+							'Role Based Access Control (RBAC)':'In order to mirror business processes even in cloud environments, managing the access for several members of an organization on the same data (user account) with different access rights is required. ',
+							'Protection':'Assurance that software, computing results, data and etc., cannot be accessed or infringed upon by other users. This includes inter-virtual machine attack prevention, storage block level isolation and hypervisor compromise protection.',
+							'Loss':'In this context loss means that the user can retrieve the deposited assets like software, data and etc., even though the service is out of operation. The redundantly stored information must be monitored for integrity. It is also expected that the software and data will be restored automatically after an entire system failure. L2: User initiated backups and snapshots enable user to restore to most recent version. L3: Disaster recovery protection and comprehensive backup and restore services added.  L4: Provider implements well-defined methods for users to establish a business continuity process.  ',
+							'Data removal':'In case a user requests his software or data to be deleted, all data/software stored in the cloud must be entirely and irretrievably removed. This requires that the appropriate techniques be employed to locate the data and all its backups, encrypted or otherwise, and to completely erase all of them into an unrecoverable state.',
+							'Data encryption':'Even if data is protected against access by other cloud users, encryption of stored data might be necessary to avoid unauthorized read of data through cloud provider employees, tools and etc. L3: the cloud provider establishes a customer’s individual private key encryption mechanism. ',
+							'Location awareness':'The user receives an indication of where his data is being stored and processed. User can specify where software and data have to be stored, run and processed. Provisions are in place to ensure all data and backups are stored only in these locations agreed by contract or the service level agreement.',
+							'User-defined security domains':'Different application types require different protection levels. Therefore, deploying SW into a cloud requires grouping of SW parts into domains, e.g. DMZ, application tier, data base tier, for which appropriate filter rules have to be defined and applied (visibility of a domain).',
+							'IP spoofing':'L2: Any attempt to maliciously access an application from within the cloud should be blocked. L3: provider implements proactive measures for intrusion detection.',
+							'Firewalls':'Resources assigned to a user should have protection against external attacks. L3: Firewall allows user specific adjustments for highly critical applications ',
+							'Security incident management and reporting':'L3: Besides protecting against attacks like Denial of Service, it is desirable that a provider detects and handles security attacks from outside as well as from inside the cloud. An immediate indication/reporting to users is needed to quickly react on an individual basis.'
+						}
+					},
+					'Lifecycle':{
+						'description':'Cloud computing is a way for users to outsource selected IT functions, infrastructure, business apps and etc.  Even when “in the cloud”, these functions remain part of an enterprise’s business processes. In addition, these functions are not static; they need extensions updates, changes and etc. Since an enterprise may use different providers for cloud services, it is important to address these life cycle and process related aspects in a well-defined standardized way.',
+						'parameters':{
+							'Development roadmap':'Ensure that the service provider has a planned way forward (process) to evolve available features and introduce new capabilities. L1: Process available. For L2 to L4 a well-defined approach comparable to “Capability Maturity Model” is needed, e.g. L2 is CMM L2, L3 is CMM L3 and L4 is CMM L4.',
+							'Security management':'In addition to the “technical” aspects of security, which are covered in the “Security” category, this topic here covers the procedural aspect of it. L1: Provider performs proactive security monitoring. L2: calls for a crisis management process to be established.  L4: Comprehensive supervision by 24x7 security operations center. ',
+							'Configuration management':'L1: Basic configuration management refers to the support of the configuration management database (CMDB) capturing basic configuration items (CI) that allow the on-line tracking of the cloud resources subscribed by the end-users. L3: This refers to the support of an enterprise class CMDB capturing comprehensive CI information with correlation capability between CI that allow the on-line track of the cloud resources and CIs relationships subscribed by the end-users.  ',
+							'Service management':'In general terms cloud services are IT services remotely offered to the customer. There are well defined and well structured methods available to determine how services are expected to be managed in an enterprise environment. One should expect the same structured approach to IT service offerings from a service provider as would be expected from an in-house IT organization. Cost, effort and rigidness increase with the ITIL level and present a natural way for mapping it into the CAT framework levels.',
+							'Reporting':'L1: Basic reporting refers to the support of simple on-line reports that cover essential cloud services. Basic reports may include report on Cloud resources subscribed for VMs, Storage, Internet IP, Bandwidth usage, etc. L2: In addition to L1 requirements an on-line information dashboard should be made available to the user, showing the list of essential Cloud services currently being deployed and utilized. It may include real-time update of information on status of VMs, Storage usage, Storage Buckets, Data transfer and others. L3: Comprehensive reporting extends L2 capabilities to include pre-defined reports and customer customizable reports that users can receive via various channels including on-line viewing, download (as .pdf, .html, .doc, etc.) from web portal or via e-mail. Comprehensive reports may include report on Cloud resources subscribed for VMs, Storage, Internet IP, bandwidth usage, VM’s performance, network performance, security threats, billing and invoicing, ticketing statistics, etc.',
+							'Portal':'“Self Service” is the cloud Web portal feature that enables customers to perform most of the essential services themselves. This includes provisioning resource, managing resources such as controlling VM status (reboot, shutdown, restart, etc.), viewing various subscribed services, downloading essential support documents (e.g. user guides and FAQ list, etc.). L2: “Service Catalog” is a function in the cloud Web portal that supports listing and grouping of all available products and services to which customers can browse and subscribe.',
+							'Deployment':'L1: Auto-provisioning is the ability of the cloud Web portal to capture customer requested cloud service subscription and automatically provision the cloud services without human intervention. L2: Custom image support permits users to customize a VM server image and quickly redeploy that via a portal on new shared cloud servers. L3: Auto VM-upgrade permits a user to upgrade the virtual core, RAM and Storage of a VM from small configuration to higher configuration without migrating the operating system and data.',
+							'Billing':'L3: Service provider keeps a history of the customer’s use of chargeable resources and services',
+							'Ticketing':'L2: Problem logging supports submission of problems and requests from a customer via a Web form, e-mail link or other methods.  L3: ticketing functions allow all customer submitted requests and problems to be logged and retrieved for viewing by customers along with statistics. ',
+						}
+					},
+					'Performance':{
+						'description':'Designing and running applications with varying levels of availability and performance in an IaaS environment requires visibility of and control over the deployed resources. The performance parameters and values below reflect what is typical of telecom and data base applications.',
+						'parameters':{
+							'Availability':'Refers to the length of time the service is offering without interruption (outside defined maintenance windows). L1: 99.95% represents standard IT hardware and software runtime uptime. L3: 99.999% is the widely accepted requirement in the telecommunications industry for high-availability services. L4: 99.9995% is required to support highly critical business applications (e.g. database applications).',
+							'Inter-VM latency':'Refers to the maximum time allowed to send a message from one software instance to another running on different physical machines.  L1: 100ms (e.g. for basic Web apps). L2: 10 microseconds (for distributed telecommunications DB services). L3: 1 microseconds (financial trading). L4: 100 nanoseconds (for at least 99.5% of messaged, for real time apps highly sophisticated redundancy architectures).',
+							'Scalability':'Measures the performance level to which a deployed application can be engineered. L3: Auto scaling support to scale an application without user monitoring or intervention.',
+							'Elasticity':'Addresses the how fast a deployed application can increase its performance response with increasing service requests. L3: elapsed detect-trigger time between application/host and infrastructure management.',
+							'Redundancy':'Redundancy architectures frequently rely on a well-defined set of software components to preserve states and transactions. L3: Service incorporates High Availability-database for high availability software design. L4: Means for cluster deployment, ensuring that software units are deployed on the physical infra structure according to requirements specified by the application.',
+							'Load distribution':'Widely used scheme to implement scalable and reliable services.',
+							'Deployment control':'Highly reliable applications implement redundancy schemes, which must be preserved when deploying to IaaS. L1: Resources are fully transparent to user. L2: NaaS (Network as a Service) for multiple networks between virtual machines. L3: Application performance engineering requires dedicated CPU resource assignment -> pinning of vCPU to cores. L4: SLA for e.g. delay, jitter, throughput, availability',
+							'Storage':'L3: Deploying critical and highly available applications to an IaaS offering requires special visibility of the storage capabilities so that the application architecture can be adjusted accordingly.'
+						}
+					}
+				};
+      </script>
+    </head>
+    <body>
+			<h1>CLOUD <span style="color: #117ca4;">ASSESSMENT TOOL 2012 (CAT)</span></h1>
+			<h2>CATEGORY SELECTION</h2>
+      <div id="preamble">
+				Please use the “Next step and “Previous step” arrows at the bottom of each page to navigate through the questionnaire. You will be able to print, save or email the results of your CAT assessment at the end of your CAT evaluation. If you need to interrupt your evaluation, you can choose to save each questionnaire page individually by clicking “Save and resume later” and resume your evaluation later.
+      </div>
+      <div id="query" style="margin-top: 20px; line-height: 40px;">
+				Please enter the name of the application that you will evaluate in this questionnaire:<br/>
+				<input type="text" id="name" name="name" style="border: 1px solid 19a59b; font-size: 12pt;" size="30"/>
+			</div>
+      <div id="query" style="margin-top: 20px;">
+				Now select the categories that you would like to evaluate for this application:<br/>
+        <ul id="major">
+        </ul>
+      </div>
+
+			{{> matrix}}
+<!--
+			<div id="info" style="position: absolute; top: 100px; left: 100px; background-color: #e0f2f7; width: 600px; padding: 20px;
+-webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+">
+<b>Access</b>: Connectivity between the end user and cloud service provider<br/>
+<b>Certification and Compliance</b>: Degree of quality assurance to the customer<br/>
+<b>Data Center Basics</b>: Data Center physical infrastructure<br/>
+<b>Interoperability</b>: Cloud hypervisor interfaces to applications<br/>
+<b>Life Cycle</b>: Long-term support impacting customer business processes<br/>
+<b>Performance</b>: Runtime behavior of deployed application software<br/>
+<b>Security</b>: Privacy, information security, regulatory<br/>
+<b>Support</b>: Deployment and maintenance of applications<br/>
+			</div>
+-->
+      <div id="results" style="display: none;">
+        Based on your selections, we have identified the following key considerations:<br/>
+        <br/>
+        <div id="considerations">
+        </div>
+        <button id="printme">Print this page</button>
+        <button id="generate">Re-run the tool</button>
+      </div>
+
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+      <script type="text/javascript">
+				$(function() {
+					$.each(config, function(major_key, value) {
+						var major_id = major_key.replace(/ /g, '_');
+						var major = $('<li id="' + major_id + '" class="major"><input type="checkbox" id="' + major_id + '" class="major"/>' + major_key + '</li>');
+						var minor = $('<ul class="minor" style="display: none;"></ul>');
+						if(value.parameters) {
+							$.each(value.parameters, function(minor_key, value) {
+								var minor_id = minor_key.replace(/ /g, '_');
+								$('<li class="minor"><input type="checkbox" id="' + minor_id + '" class="minor"/>' + minor_key + '</li>').appendTo(minor);
+							});
+						}
+						var el = major.appendTo($('ul#major'))
+						minor.appendTo(el);
+					});
+
+					$('input[type="checkbox"].major').on('click', function() {
+						if($(this).is(':checked')) {
+							$(this).parent('li.major').find('ul.minor').fadeIn();
+						} else {
+							$(this).parent('li.major').find('ul.minor').fadeOut();
+						}
+					});
+
+					$('button#printme').on('click', function() {
+						window.print();
+					});
+
+					$('button#generate').on('click', function() {
+						if($('div#query').is(':visible')) {
+
+							$('div#considerations').html('');
+
+							$('input[type="checkbox"].major:checked').each(function() {
+								var major_id = this.id;
+								var major_key = major_id.replace(/_/g, ' ');
+								var cfg = config[major_key];
+								console.log('found major tick ' + major_key);
+								$('<h2>' + major_key + '</h2>').appendTo($('div#considerations'));
+								$('<div>' + cfg.description + '</div>').appendTo($('div#considerations'));
+								$('li#' + major_id).find('input[type="checkbox"].minor:checked').each(function() {
+									var minor_id = this.id;
+									var minor_key = minor_id.replace(/_/g, ' ');
+									console.log('found minor tick ' + minor_key);
+									$('<p><b>' + minor_key + '</b>&nbsp;' + cfg.parameters[minor_key] + '</p>').appendTo($('div#considerations'));
+								});
+							});
+
+							$('div#query').fadeOut(function() { $('div#results').fadeIn('fast'); });
+						} else {
+							$('div#results').fadeOut(function() { $('div#query').fadeIn('fast'); });
+						}
+					});
+				});
+      </script>
+
+<!-- Uncomment the below and set UA-XXXXXX-X to use Google Analytics
+       <script>
+         var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+         s.parentNode.insertBefore(g,s)}(document,'script'));
+       </script>
+-->
+
+			<div id="nav" style="float: left; clear: both; background-color: #19a59b; color: white; width: 100%; padding: 10px;">
+				<div class="prev" style="float: left; width: 10%;">&lt; Previous Step</div>
+				<div class="save" style="float: left; width: 80%; text-align: center;">Save &amp; Resume Later</div>
+				<div class="next" style="float: right; width: 10%; text-align: right;">Next Step &gt;</div>
+			</div>
+    </body>
+
+			<template name="matrix">
+				<table>
+					<thead>
+					<tr>
+						<td>&nbsp;</td>
+						{{#each header}}
+							<td>{{cell}}</td>
+						{{/each}}
+					</tr>
+					</thead>
+					<tbody>
+					{{#each row}}
+						<tr>
+						{{#each col}}
+							<td class="{{#if rowtitle}}choice{{/if}}">{{cell}}</td>
+						{{/each}}
+					{{/each}}
+					</tbody>
+				</table>
+			</template>
