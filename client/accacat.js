@@ -3,6 +3,7 @@ var cats = [
 	{
 		'category': 'Security',
 		'description': 'Privacy, information security, regulatory',
+		'onselectclear': 'row',
 		'cols': [
 			{ 'title': 'Authentication', 'rows': [
 					{ 'title': 'L4' },
@@ -24,6 +25,7 @@ var cats = [
 	{
 		'category': 'Life Cycle',
 		'description': 'Long-term support impacting customer business processes',
+		'onselectclear': 'row',
 		'cols': [
 			{ 'title': 'Dev. Roadmap', 'rows': [
 					{ 'title': 'L4', 'cell': 'CMM L4' },
@@ -57,6 +59,9 @@ var cats = [
 */
 ];
 
+var categories = {};
+_.each(cats, function(cat) { categories[cat.category] = cat; });
+
 Assessments = new Meteor.Collection('assessments');
 
 Session.set('assessment_id', null);
@@ -69,8 +74,15 @@ Meteor.autosubscribe(function () {
 
 Template.matrix.events({
 	'click td.choice': function(e) {
-		$(e.target).parent().find('td.sel').removeClass('sel');
-		$(e.target).addClass('sel');
+		if(this.cell == undefined || this.cell == '') return;
+		var onselectclear = categories[ Session.get('category') ].onselectclear;
+		if(onselectclear == undefined || onselectclear == 'row') {
+			$(e.target).parents('tr').find('td.sel').removeClass('sel');
+			$(e.target).addClass('sel');
+		} else if(onselectclear == 'table') {
+			$(e.target).parents('tbody').find('td.sel').removeClass('sel');
+			$(e.target).addClass('sel');
+		}
 	}
 });
 
