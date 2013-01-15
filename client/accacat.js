@@ -98,61 +98,33 @@ if(Meteor.is_client) {
 			var selcoltitle = this.col;
 
 			var onselectclear = categories[ Session.get('category') ].onselectclear;
-			if(onselectclear == undefined || onselectclear == 'row') {
-				$(e.target).parents('tr').find('td.sel').removeClass('sel');
-				_.each(categories[ Session.get('category') ].cols, function(col) {
-					_.each(col.rows, function(row) {
-						if(row.title == selrowtitle) {
-							row.cellsel = 0;
-						}
-					});
+			_.each(categories[ Session.get('category') ].cols, function(col) {
+				_.each(col.rows, function(row) {
+					if(row.title == selrowtitle || onselectclear == 'table') row.cellsel = 0;
 				});
-			} else if(onselectclear == 'table') {
-				$(e.target).parents('tbody').find('td.sel').removeClass('sel');
-				_.each(categories[ Session.get('category') ].cols, function(col) {
-					_.each(col.rows, function(row) {
-							row.cellsel = 0;
-					});
-				});
-			}
+			});
 
 			if(this.cellsel != 1) { // If the cell was not previously selected i.e. we are de-selecting
 				_.each(categories[ Session.get('category') ].cols, function(col) {
 					if(col.title == selcoltitle) {
 						_.each(col.rows, function(row) {
-							if(row.title == selrowtitle) {
-								row.cellsel = 1;
-							}
+							if(row.title == selrowtitle) row.cellsel = 1;
 						});
 					}
 				});
 			}
 
 /* 		TODO: Once minimongo supports $ positional access we can use this more efficient form
-      Assessments.update({ 'assessment_id': Session.get('assessment_id'), 'data.category':Session.get('category'), 'data.cols.title':selcoltitle, 'data.cols.rows.title':selrowtitle, 'data.cols.rows.cell':selcelltitle }, {
-        $set: {
-          'data.cols.rows.$.cellsel': 1
-        }
-      });
+      Assessments.update({ 'assessment_id': Session.get('assessment_id'), 'data.category':Session.get('category'), 'data.cols.title':selcoltitle, 'data.cols.rows.title':selrowtitle, 'data.cols.rows.cell':selcelltitle }, { $set: { 'data.cols.rows.$.cellsel': 1 } });
 */
 
-			Assessments.update({ 'assessment_id': Session.get('assessment_id') }, {
-				$set: {
-					'data': assessment.data
-				}
-			});
-
+			Assessments.update({ 'assessment_id': Session.get('assessment_id') }, { $set: { 'data': assessment.data } });
 		}
 	});
-
-	Template.matrix.rendered = function() { console.log('matrix rendered'); };
-
 	Template.matrix.row = function() {
 		var assessment = Assessments.findOne({ assessment_id: Session.get('assessment_id') });
 		var rows = {};
-console.log('REFRESH');
 		if(assessment) {
-console.log('REFRESHED');
 			var cols = assessment.data[0].cols;	
 			_.each(cols, function(col) {
 				_.each(col.rows, function(row) {
