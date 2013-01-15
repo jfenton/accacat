@@ -164,7 +164,6 @@ if(Meteor.is_client) {
 			':assessment_id': 'evaluation'
 		},
 		evaluation: function(assessment_id) {
-			console.log('in evaluation', assessment_id);
 			Session.set("assessment_id", assessment_id);
 			Session.set('category', 'Security');
 		},
