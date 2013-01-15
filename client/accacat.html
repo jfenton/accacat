@@ -150,21 +150,7 @@
     </head>
     <body>
 			<h1>CLOUD <span style="color: #117ca4;">ASSESSMENT TOOL 2012 (CAT)</span></h1>
-			<h2>CATEGORY SELECTION</h2>
-      <div id="preamble">
-				Please use the “Next step and “Previous step” arrows at the bottom of each page to navigate through the questionnaire. You will be able to print, save or email the results of your CAT assessment at the end of your CAT evaluation. If you need to interrupt your evaluation, you can choose to save each questionnaire page individually by clicking “Save and resume later” and resume your evaluation later.
-      </div>
-      <div id="query" style="margin-top: 20px; line-height: 40px;">
-				Please enter the name of the application that you will evaluate in this questionnaire:<br/>
-				<input type="text" id="name" name="name" style="border: 1px solid 19a59b; font-size: 12pt;" size="30"/>
-			</div>
-      <div id="query" style="margin-top: 20px;">
-				Now select the categories that you would like to evaluate for this application:<br/>
-        <ul id="major">
-        </ul>
-      </div>
-
-			{{> matrix}}
+			{{> category_selection }}
 <!--
 			<div id="info" style="position: absolute; top: 100px; left: 100px; background-color: #e0f2f7; width: 600px; padding: 20px;
 -webkit-border-radius: 20px;
@@ -263,23 +249,43 @@ border-radius: 20px;
 			</div>
     </body>
 
-			<template name="matrix">
-				<table>
-					<thead>
-					<tr>
-						<td>&nbsp;</td>
-						{{#each header}}
-							<td>{{cell}}</td>
-						{{/each}}
-					</tr>
-					</thead>
-					<tbody>
-					{{#each row}}
-						<tr>
-						{{#each col}}
-							<td class="{{#if rowtitle}}choice{{/if}}">{{cell}}</td>
-						{{/each}}
-					{{/each}}
-					</tbody>
-				</table>
-			</template>
+<template name="matrix">
+	<table>
+		<thead>
+			<tr>
+				<td>&nbsp;</td>
+				{{#each header}}
+					<td>{{cell}}</td>
+				{{/each}}
+			</tr>
+		</thead>
+		<tbody>
+			{{#each row}}
+			<tr>
+				{{#each col}}
+				<td id="{{rowtitle}}-{{coltitle}}" class="{{#if selectable}}choice{{/if}}{{#if cellsel}} sel{{/if}}">{{cell}}</td>
+				{{/each}}
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="category_selection">
+<h2>CATEGORY SELECTION</h2>
+<div id="preamble">
+Please use the “Next step and “Previous step” arrows at the bottom of each page to navigate through the questionnaire. You will be able to print, save or email the results of your CAT assessment at the end of your CAT evaluation. If you need to interrupt your evaluation, you can choose to save each questionnaire page individually by clicking “Save and resume later” and resume your evaluation later.
+</div>
+<div id="query" style="margin-top: 20px; line-height: 40px;">
+Please enter the name of the application that you will evaluate in this questionnaire:<br/>
+<input type="text" id="application_name" name="application_name" style="border: 1px solid 19a59b; font-size: 12pt;" size="30" value="{{ assessment.application_name }}"/>
+</div>
+<div id="query" style="margin-top: 20px;">
+Now select the categories that you would like to evaluate for this application:<br/>
+<ul id="major">
+</ul>
+</div>
+
+{{> matrix}}
+</template>
+
