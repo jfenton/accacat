@@ -53,7 +53,6 @@ if(Meteor.is_server) {
 	*/
 
 		Meteor.publish('assessment', function(assessment_id) {
-			console.log('Asked to publish assessment', assessment_id);
 			return Assessments.find({ assessment_id: assessment_id });
 		});
 
