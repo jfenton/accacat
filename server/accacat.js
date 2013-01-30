@@ -5,7 +5,6 @@ if(Meteor.is_server) {
 
 		Meteor.publish('assessment', function(assessment_id) {
 			if(assessment_id) {
-				console.log('publishing assessment_id ' + assessment_id + ' to client');
 				return Assessments.find({ _id: assessment_id });
 			}
 		});

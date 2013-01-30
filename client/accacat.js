@@ -7,15 +7,11 @@ if(Meteor.is_client) {
 		var Router;
 
 		Meteor.autosubscribe(function() {
-console.log('autosub');
 			var assessment_id = Session.get('assessment_id');
 			if(assessment_id) {
-				console.log('client autosubscribe called for ' + assessment_id);
 				Meteor.subscribe('assessment', assessment_id);
-					console.log('subscription complete');
 					var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
 					if(assessment) {
-						console.log('during autosub, found assessment ' + assessment_id);
 						var page = Session.get('page');
 						$('div#page').html('');
 						if(page == 'categories') {
@@ -720,9 +716,9 @@ console.log('autosub');
 
 		function read_cookie(k,r){return(r=RegExp('(^|; )'+encodeURIComponent(k)+'=([^;]*)').exec(document.cookie))?r[2]:null;}
 
-
 		Template.assessment_finished.events({
 			'click button.viewresults': function(e) {
+				_gaq.push(['_trackPageview', '/assessment/results/pdf']);
 				var button = $('button.viewresults');
 				button.data('oldtxt', button.text()).text('Please wait...').attr('disabled','disabled');
 				$('form#pdf input[name="src"]').val(window.location.href.replace('completed','results'));
@@ -733,15 +729,19 @@ console.log('autosub');
 //			Router.navigate('/' + Session.get('assessment_id') + '/results', true);
 			},
 			'click button.emailresults': function(e) {
+				_gaq.push(['_trackPageview', '/assessment/results/email']);
 				Router.navigate('/' + Session.get('assessment_id') + '/results', true);
 			},
 			'click button.startagain': function(e) {
+				_gaq.push(['_trackPageview', '/assessment/completed/startagain']);
 				Router.navigate('/', true);
 			},
 			'click button.feedback': function(e) {
+				_gaq.push(['_trackPageview', '/assessment/completed/feedback']);
 				$('div.gsfn-widget-tab').trigger('click');
 			},
 			'click button.accasite': function(e) {
+				_gaq.push(['_trackPageview', '/assessment/completed/acca']);
 				window.location.href = 'http://www.asiacloud.org/';
 			}
 		});
@@ -752,7 +752,6 @@ console.log('autosub');
 				var update = {
 					$set: {'application_name': e.target.value}
 				};
-console.log('udpating ' + assessment_id);
 				Assessments.update({ _id: assessment_id }, update);
 			},
 			'click li.category': function(e) {
@@ -767,7 +766,6 @@ console.log('udpating ' + assessment_id);
 				var assessment_stack = ['Categories'];
 				_.each(assessment.data, function(datum) { if(datum.sel == 1) assessment_stack.push(datum.category); });
 				assessment_stack.push('Completed');
-console.log('updated ' + Session.get('assessment_id'));
 				Assessments.update({ _id: Session.get('assessment_id') }, { $set: { 'stack': assessment_stack, 'data':assessment.data } });
 			}
 		});
@@ -990,12 +988,15 @@ console.log('updated ' + Session.get('assessment_id'));
 				'*assessment_id': 'defaultPage'
 			},
 			specificResultsPage: function(assessment_id, page) {
+				_gaq.push(['_trackPageview', '/assessment/results']);
 				Session.set('assessment_id', assessment_id);
 				Session.set('page', 'result');
 				Session.set('category', page.replace(/_/g, ' ').capitalise());
 				Session.set('current', page.replace(/_/g, ' ').capitalise());
 			},
 			specificPage: function(assessment_id, page) {
+				_gaq.push(['_trackPageview', '/assessment/' + page]);
+				_gaq.push(['_trackEvent', 'Assessment', 'Page', assessment_id]);
 				Session.set('assessment_id', assessment_id);
 				Session.set('page', page);
 				Session.set('category', page.replace(/_/g, ' ').capitalise());
@@ -1003,23 +1004,25 @@ console.log('updated ' + Session.get('assessment_id'));
 			},
 			defaultPage: function(assessment_id) {
 				if(assessment_id == '') {
+					_gaq.push(['_trackPageview', '/']);
 					var last_assessment = read_cookie('last_assessment');
 					if(last_assessment) {
 						this.navigate('/' + last_assessment);
 					} else {
 						$('div#page').html('');
+						_gaq.push(['_trackPageview', '/profiles']);
 						$(Meteor.render(function() { return Template.profile_selection({}); })).appendTo('div#page');
 					}
-				} else if(assessment_id.indexOf('-') > 0 && Assessments.findOne({ _id: assessment_id })) {
-					Session.set('category', 'Categories');
-					this.navigate('/' + assessment_id + '/' + Session.get('category').replace(/ /g, '_').toLowerCase(), true);
+				} else if(assessment_id.indexOf('-') > 0) {
+					this.navigate('/' + assessment_id.replace('/','') + '/categories', true);
 				} else {
+					_gaq.push(['_trackPageview', '/assessment/new/' + assessment_id]);
+					_gaq.push(['_trackEvent', 'Assessment', 'New', assessment_id]);
 					assessment_id = Assessments.insert({
 						'application_name': '',
 						'stack': ['Categories'],
 						'data': assessment_template
 					});
-					console.log('created new application', assessment_id);
 					assessment = Assessments.findOne({ _id: assessment_id });
 					this.navigate('/' + assessment_id, true);
 				}

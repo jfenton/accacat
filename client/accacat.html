@@ -110,6 +110,17 @@
 	<script type="text/javascript">
 	if (typeof GSFN !== "undefined") { GSFN.loadWidget(4059,{"containerId":"getsat-widget-4059"}); }
 	</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38090721-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 </head>
 <body>
 	<div id="header">
@@ -155,14 +166,14 @@
 			<a href="#">Download the CAT whitepaper.</a>
 		</div>
 		<div class="profile" style="float: left; width: 30%;">
-			<a href="/cat">
+			<a href="/clouduser">
 				<img src="/img/profile-cloud_user.jpg" width="150"/><br/>
 				I am a prospective cloud user:<br/>
 				Run CAT now!
 			</a>
 		</div>
 		<div class="profile" style="float: left; width: 30%;">
-			<a href="/cat">
+			<a href="/cloudprovider">
 				<img src="/img/profile-cloud_provider.jpg" width="300"/><br/>
 				I am a cloud provider:<br/>
 				Run CAT now!
@@ -283,7 +294,7 @@
 	<div id="nav" style="margin-top: 30px; background-color: #19a59b; color: white; padding: 10px; height: 21pt;">
 		<div class="{{#if atstart}}startagain{{else}}prev{{/if}}" style="float: left; width: 15%;">&lt; <a href="#" onClick="return false;">{{#if atstart}}Start Again{{else}}Previous Step{{/if}}</a></div>
 		<div class="save" style="float: left; width: 70%; text-align: center;">
-			<a href="#" onClick="return false;">Save &amp; Resume Later</a> | <a href="mailto:colleague@company.com?subject=Assistance%20with%20completeing%20Cloud%20Assessment&body=%0dDear colleague,%0d%0dI need your help in completing this Cloud Assessment tool.%0d%0dPlease visit%20http://127.0.0.1:3002/{{ assessment_id }}/{{ current_category }}%20and%20fill%20in%20the%20gaps.%0d%0dThank%20you!%0d%0dBest%20Regards,%0d%0dX%20Y">Collaborate With Others</a>
+			<a href="#" onClick="alert('Simply bookmark this page and your choices will be here for you when you return.'); return false;">Save &amp; Resume Later</a> | <a href="mailto:colleague@company.com?subject=Assistance%20with%20completeing%20Cloud%20Assessment&body=%0dDear colleague,%0d%0dI need your help in completing this Cloud Assessment tool.%0d%0dPlease visit%20https://accacat.herokuapp.com/{{ assessment_id }}/{{ current_category }}%20and%20fill%20in%20the%20gaps.%0d%0dThank%20you!">Collaborate - Share This Page With A Colleague</a>
 		</div>
 		<div class="next" style="float: right; width: 15%; text-align: right;"><a href="#" onClick="return false;">Next Step</a> &gt;</div>
 	</div>
