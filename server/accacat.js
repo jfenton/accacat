@@ -1,9 +1,16 @@
 
 if(Meteor.is_server) {
 
-	var Assessments = new Meteor.Collection('assessments');
-
 	Meteor.startup(function() {
+
+		var Assessments = new Meteor.Collection('assessments');
+
+		Meteor.publish('assessment', function(assessment_id) {
+			if(assessment_id) {
+				console.log('publishing assessment_id ' + assessment_id + ' to client');
+				return Assessments.find({ assessment_id: assessment_id });
+			}
+		});
 
 		// Disable ability for client to 'remove' documents from collections
 	/*
@@ -16,6 +23,11 @@ if(Meteor.is_server) {
 	*/
 
 		Meteor.methods({
+
+/*
+			email_assessment: function(assessment_id, to, subject, text) {
+			},
+*/
 			create_or_get_assessment: function(assessment_id) {
 				var assessment = Assessments.findOne({ assessment_id: assessment_id });
 				if(!assessment) {
@@ -51,10 +63,6 @@ if(Meteor.is_server) {
 			}
 		});
 	*/
-
-		Meteor.publish('assessment', function(assessment_id) {
-			return Assessments.find({ assessment_id: assessment_id });
-		});
 
 	});
 
