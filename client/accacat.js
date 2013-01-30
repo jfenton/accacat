@@ -1,18 +1,21 @@
 
+var Assessments = new Meteor.Collection('assessments');
+
 if(Meteor.is_client) {
 
 	Meteor.startup(function() {
 		var Router;
 
-		var Assessments = new Meteor.Collection('assessments');
-
 		Meteor.autosubscribe(function() {
+console.log('autosub');
 			var assessment_id = Session.get('assessment_id');
 			if(assessment_id) {
-				// console.log('client now subscribed to ' + assessment_id);
+				console.log('client autosubscribe called for ' + assessment_id);
 				Meteor.subscribe('assessment', assessment_id);
-				var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
-				if(assessment) {
+					console.log('subscription complete');
+					var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+					if(assessment) {
+						console.log('during autosub, found assessment ' + assessment_id);
 						var page = Session.get('page');
 						$('div#page').html('');
 						if(page == 'categories') {
@@ -26,12 +29,12 @@ if(Meteor.is_client) {
 						} else {
 							$(Meteor.render(function() { return Template.category_evaluation({ 'category':Session.get('category') }); })).appendTo('div#page');
 						}
-				}
+					}
 			}
 		});
 
 		// Data structure used to build the choice matrices
-		var assessment_template = [
+	var assessment_template = [
 /*
 			{
 				'category': 'CAT Category',
@@ -720,14 +723,14 @@ if(Meteor.is_client) {
 
 		Template.assessment_finished.events({
 			'click button.viewresults': function(e) {
+				var button = $('button.viewresults');
+				button.data('oldtxt', button.text()).text('Please wait...').attr('disabled','disabled');
 				$('form#pdf input[name="src"]').val(window.location.href.replace('completed','results'));
 				$('form#pdf').submit();
-/*
-				Meteor.call('pdf_assessment', Session.get('assessment_id'), window.location.href.replace('completed','results'), function(err, res) {
-					window.location.href = '/' + Session.get('assessment_id') + '.pdf';
-				});
-*/
-//				Router.navigate('/' + Session.get('assessment_id') + '/results', true);
+				var resetButton = setInterval(function() {
+					button.text(button.data('oldtext')).attr('disabled','');
+				}, 10000);
+//			Router.navigate('/' + Session.get('assessment_id') + '/results', true);
 			},
 			'click button.emailresults': function(e) {
 				Router.navigate('/' + Session.get('assessment_id') + '/results', true);
@@ -749,6 +752,7 @@ if(Meteor.is_client) {
 				var update = {
 					$set: {'application_name': e.target.value}
 				};
+console.log('udpating ' + assessment_id);
 				Assessments.update({ _id: assessment_id }, update);
 			},
 			'click li.category': function(e) {
@@ -763,6 +767,7 @@ if(Meteor.is_client) {
 				var assessment_stack = ['Categories'];
 				_.each(assessment.data, function(datum) { if(datum.sel == 1) assessment_stack.push(datum.category); });
 				assessment_stack.push('Completed');
+console.log('updated ' + Session.get('assessment_id'));
 				Assessments.update({ _id: Session.get('assessment_id') }, { $set: { 'stack': assessment_stack, 'data':assessment.data } });
 			}
 		});
@@ -1014,7 +1019,7 @@ if(Meteor.is_client) {
 						'stack': ['Categories'],
 						'data': assessment_template
 					});
-					// console.log('created new application', assessment_id);
+					console.log('created new application', assessment_id);
 					assessment = Assessments.findOne({ _id: assessment_id });
 					this.navigate('/' + assessment_id, true);
 				}
