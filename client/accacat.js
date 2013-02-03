@@ -729,8 +729,14 @@ if(Meteor.is_client) {
 //			Router.navigate('/' + Session.get('assessment_id') + '/results', true);
 			},
 			'click button.emailresults': function(e) {
-				_gaq.push(['_trackPageview', '/assessment/results/email']);
-				Router.navigate('/' + Session.get('assessment_id') + '/results', true);
+				var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+				var to = prompt('Please enter the email address to send to:');
+				if(to) {
+					Meteor.apply('email_assessment', [Session.get('assessment_id'), assessment.application_name, to, 'ACCA Cloud Assessment Tool results for ' + assessment.application_name, "\nPlease find attached your requested ACCA CAT results.\n"], function() {
+						alert('Your email has been sent.');
+					});
+					_gaq.push(['_trackPageview', '/assessment/results/email']);
+				}
 			},
 			'click button.startagain': function(e) {
 				_gaq.push(['_trackPageview', '/assessment/completed/startagain']);
