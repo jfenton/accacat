@@ -101,7 +101,7 @@ if(Meteor.is_server) {
 						rstream.on('end', function() {
 							var mc = new MailComposer();
 							mc.setMessageOption({
-								from: 'jay.fenton@gmail.com',
+								from: 'CAT@asiacloud.org',
 								to: to,
 								subject: subject,
 								text: text
