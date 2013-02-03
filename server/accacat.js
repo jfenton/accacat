@@ -66,24 +66,20 @@ if(Meteor.is_server) {
 		}
 	};
 
-/*
-	var http = require('http');
-	var fs = require('fs');
-*/
 	var pdfcrowd = NodeModules.require('pdfcrowd');
 
-		Meteor.startup(function() {
-			var Assessments = new Meteor.Collection('assessments');
+	Meteor.startup(function() {
+		var Assessments = new Meteor.Collection('assessments');
 
-			Meteor.publish('assessment', function(assessment_id) {
-				if(assessment_id) {
+		Meteor.publish('assessment', function(assessment_id) {
+			if(assessment_id) {
 				return Assessments.find({ _id: assessment_id });
 			}
 		});
 
-    var simplesmtp = NodeModules.require('simplesmtp');
-    var MailComposer = NodeModules.require('MailComposer').MailComposer;
-    var pool = simplesmtp.createClientPool(
+		var simplesmtp = require('simplesmtp');
+		var MailComposer = require('mailcomposer').MailComposer;
+		var pool = simplesmtp.createClientPool(
 			465, // SMTP Port
 			'smtp.gmail.com',
 			{
