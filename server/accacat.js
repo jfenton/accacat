@@ -83,7 +83,7 @@ if(Meteor.is_server) {
 			587, // SMTP Port
 			'smtp.sendgrid.net',
 			{
-				secureConnection: true,
+				secureConnection: false,
 				auth: {
 					user: 'app11443580@heroku.com',
 					pass: 'b3dyxtya'
@@ -114,6 +114,7 @@ if(Meteor.is_server) {
 							});
 
 							pool.sendMail(mc);
+							console.log('sent email to ' + to);
 						});
 						rstream.pipe(wstream);
 					},
