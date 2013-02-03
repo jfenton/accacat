@@ -36,9 +36,13 @@
 		div#considerations {
 			margin-bottom: 20px;
 		}
+		table {
+			width: 100%;
+		}
 		table tr td {
 			padding: 10px;
 			border: 1px solid #dddddd;
+			width: 160px;
 		}
 		table tr td.sel {
 			background-color: #19a59b;
@@ -97,6 +101,9 @@
 		div.matrix td.bold {
 			font-weight: bold;
 		}
+		div.matrix td.first {
+			width: 200px;
+		}
 		button {
 			background-color: #19a59b;
 			border: none;
@@ -144,7 +151,7 @@
 			{{#each row}}
 			<tr>
 				{{#each col}}
-				<td id="{{rowtitle}}-{{coltitle}}" class="{{#if selectable}}choice{{/if}}{{#if cellsel}} sel{{/if}}{{#if first}}bold{{/if}}">{{cell}}</td>
+				<td id="{{rowtitle}}-{{coltitle}}" class="{{#if selectable}}choice{{/if}}{{#if cellsel}} sel{{/if}}{{#if first}}bold first{{/if}}">{{cell}}</td>
 				{{/each}}
 			</tr>
 			{{/each}}
@@ -155,26 +162,26 @@
 <template name="profile_selection">
 	<h2>WELCOME TO ASIA CLOUD'S CLOUD ASSESSMENT TOOL</h2>
 	<div id="preamble">
-		A Cloud Assessment Tool (CAT) has been prepared by the Asia Cloud Computing Association (ACCA). The aim of this tool is to enable prospective users of cloud computing to objectively assess the operational, performance and other critical capabilities required to migrate their applications to the cloud. CAT also permits cloud computing providers to evaluate their services offering against a series of standardized parameters, thereby gaining a better understanding of their service level as well as their weaknesses and gaps.<br/>
+		A Cloud Assessment Tool (CAT) has been prepared by the Asia Cloud Computing Association (ACCA). The aim of this tool is to enable prospective users of cloud computing to objectively assess the operational, performance and other critical capabilities required to migrate their applications to the cloud. CAT also permits cloud computing providers to evaluate their services offering against a series of standardized parameters, thereby gaining a better understanding of their service level as well as their weaknesses and gaps. The framework consists of a matrix of parameters classified into different levels including: eight key operational criteria; parameters for each individual criterion; four performance levels; and eight matrices that map operational parameter values to the operational criteria.<br/>
 		<br/>
-		The framework consists of a matrix of parameters classified into different levels including: eight key operational criteria; parameters for each individual crite- rion; four performance levels; and eight matrices that map operational parameter values to the operational criteria. Click the button below to download the Association's white paper which describes our cloud assessment tool in further detail or start using it right away. We welcome your comments at CAT@asiacloud.org.<br/>
+		Click the button below to download the Association's white paper which describes our cloud assessment tool in further detail or start using it right away. We welcome your comments at CAT@asiacloud.org.<br/>
 	</div>
 	<div id="profiles">
-		<div class="profile" style="float: left; width: 30%;">
-			<img src="/img/profile-interested.jpg" width="300"/><br/>
+		<div class="profile" style="float: left; width: 30%; text-align: center;">
+			<img src="/img/profile-interested.jpg"/><br/>
 			I want to learn about CAT:<br/>
 			<a href="#">Download the CAT whitepaper.</a>
 		</div>
-		<div class="profile" style="float: left; width: 30%;">
+		<div class="profile" style="float: left; width: 30%; text-align: center;">
 			<a href="/clouduser">
-				<img src="/img/profile-cloud_user.jpg" width="150"/><br/>
+				<img src="/img/profile-cloud_user.jpg"/><br/>
 				I am a prospective cloud user:<br/>
 				Run CAT now!
 			</a>
 		</div>
-		<div class="profile" style="float: left; width: 30%;">
+		<div class="profile" style="float: left; width: 30%; text-align: center;">
 			<a href="/cloudprovider">
-				<img src="/img/profile-cloud_provider.jpg" width="300"/><br/>
+				<img src="/img/profile-cloud_provider.jpg"/><br/>
 				I am a cloud provider:<br/>
 				Run CAT now!
 			</a>
@@ -185,16 +192,16 @@
 <template name="category_selection">
 	<h2>CATEGORY SELECTION</h2>
 	<div id="preamble">
-		Please use the “Next step and “Previous step” arrows at the bottom of each page to navigate through the questionnaire. You will be able to print, save or email the results of your CAT assessment at the end of your CAT evaluation. If you need to interrupt your evaluation, you can choose to save each questionnaire page individually by clicking “Save and resume later” and resume your evaluation later.
+		Please use the “Next step and “Previous step” arrows at the bottom of each page to navigate through the questionnaire. You will be able to print, save or email the results of your CAT assessment at the end of your CAT evaluation. If you need to interrupt your evaluation, you can choose to save each questionnaire page individually by clicking “Save and resume later” and resume your evaluation later. By clicking on the Collaborate link below, you can invite a colleague to assist you in completing the questionnaire via an emailed link.
 	</div>
 	<div id="query" style="margin-top: 20px; line-height: 40px;">
 		Please enter the name of the application that you will evaluate in this questionnaire:<br/>
-		<input type="text" id="application_name" name="application_name" style="border: 1px solid 19a59b; font-size: 12pt;" size="30" value="{{ assessment.application_name }}"/>
+		<input type="text" id="application_name" name="application_name" style="border: 1px solid 19a59b; font-size: 12pt;" size="30" value="{{ application_name }}"/>
 	</div>
 	<div id="query" style="margin-top: 20px;">
 		Now select the categories that you would like to evaluate for this application:<br/>
 		<ul id="categories" style="background-color: #e0f2f7; width: 500px; padding: 20px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px;">
-			<li>Please select</li>
+			<li>Please select one or more of categories:</li>
 			{{#each category}}
 			<li class="category {{#if category_selected}}sel{{/if}}">
 				<div style="float: left; width: 17px; margin-left: 5px; font-family: Helvetica;">
@@ -211,14 +218,14 @@
 	<h2>ASSESSMENT COMPLETED</h2>
 	<div id="preamble">
 		Congratulations, you have finished evaluating the following application: What would you like to do with the results?<br/>
-		<button class="viewresults">View and print the CAT results</button><br/>
+		<button class="viewresults">View and print the CAT results</button>
 		<button class="emailresults">Email CAT results</button>
 	</div>
 	<div id="query" style="margin-top: 20px; line-height: 40px;">
 		What would you like to do next?<br/>
-		<button class="startagain">Assess another application using CAT</button><br/>
-		<button class="feedback">Provide feedback on CAT</button><br/>
-		<button class="accasite">Return to the ACCA Website</button><br/>
+		<button class="startagain">Assess another application using CAT</button>
+		<button class="feedback">Provide feedback on CAT</button>
+		<button class="accasite">Return to the ACCA Website</button>
 	</div>
 	<form method="POST" action="http://pdfcrowd.com/api/pdf/convert/uri/" name="pdf" id="pdf">
 		<input type="hidden" name="username" value="acca"/>
@@ -230,6 +237,7 @@
 		<input type="hidden" name="vmargin" value="0.2in"/>
 		<input type="hidden" name="no_modify" value="1"/>
 		<input type="hidden" name="no_copy" value="1"/>
+		<input type="hidden" name="pdf_name" value="{{ pdf_name }}"/>
 		<input type="hidden" name="page_layout" value="2"/>
 		<input type="hidden" name="initial_pdf_zoom_type" value="3"/>
 		<input type="hidden" name="pdf_scaling_factor" value="0.8"/>
@@ -239,17 +247,19 @@
 <template name="print_category_results">
 	<div class="wrapper" style="position: relative; border: 1px solid #444444; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; padding-top: 10px; padding-bottom: 10px; padding-left: 20px; padding-right: 20px; margin: 10px;">
 		{{> category_results }}
-		<center>Generated by CAT, the <a href="http://www.asiacloud.org/">Asia Cloud Computing Assocationn</a> <a href="http://accacat.metro.com/">Cloud Assessment Tool</a>™ 2012</center>
+		<center>Generated by CAT, the <a href="http://www.asiacloud.org/">Asia Cloud Computing Assocation</a> <a href="http://accacat.metro.com/">Cloud Assessment Tool</a>™ 2012</center>
 	</div>
+	{{#unless last_category}}
 	<div style="page-break-before: always;"></div>
+	{{/unless}}
 </template>
 
 <template name="category_results">
 	<div class="results" style="margin: 20px;">
 		<div class="header" style="margin-bottom: 16pt;">
 			<h1>CLOUD <span style="color: #117ca4;">ASSESSMENT TOOL 2012 (CAT)</span></h1>
-			CAT EVALUATION FOR: <span style="color: #117ca4;">{{ assessment.application_name }}</span><br/>
-			Category Evaluated: <span style="color: #117ca4;">{{ category.category }}</span><br/>
+			<h2 style="margin-bottom: 7px;"><span style="color: #117ca4;">{{ category.category }}</span></h2>
+			<span style="color: #117ca4;">{{ assessment.application_name }}</span><br/>
 		</div>
 		<a href="http://www.asiacloud.org/"><img src="/img/acca-logo.png" style="position: absolute; top: 28px; right: 40px;"/></a>
 		<div style="width: 100%; background-color: #eeeeee; padding-top: 20px; padding-bottom: 20px;">
@@ -292,7 +302,7 @@
 <template name="nav">
 	{{#unless profile_selection}}
 	<div id="nav" style="margin-top: 30px; background-color: #19a59b; color: white; padding: 10px; height: 21pt;">
-		<div class="{{#if atstart}}startagain{{else}}prev{{/if}}" style="float: left; width: 15%;">&lt; <a href="#" onClick="return false;">{{#if atstart}}Start Again{{else}}Previous Step{{/if}}</a></div>
+		<div class="{{#if atstart}}startagain{{else}}prev{{/if}}" style="float: left; width: 15%;">&lt; <a href="#" onClick="return false;">Previous Step</a></div>
 		<div class="save" style="float: left; width: 70%; text-align: center;">
 			<a href="#" onClick="alert('Simply bookmark this page and your choices will be here for you when you return.'); return false;">Save &amp; Resume Later</a> | <a href="mailto:colleague@company.com?subject=Assistance%20with%20completeing%20Cloud%20Assessment&body=%0dDear colleague,%0d%0dI need your help in completing this Cloud Assessment tool.%0d%0dPlease visit%20https://accacat.herokuapp.com/{{ assessment_id }}/{{ current_category }}%20and%20fill%20in%20the%20gaps.%0d%0dThank%20you!">Collaborate - Share This Page With A Colleague</a>
 		</div>

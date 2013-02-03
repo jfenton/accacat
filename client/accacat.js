@@ -720,7 +720,7 @@ if(Meteor.is_client) {
 			'click button.viewresults': function(e) {
 				_gaq.push(['_trackPageview', '/assessment/results/pdf']);
 				var button = $('button.viewresults');
-				button.data('oldtxt', button.text()).text('Please wait...').attr('disabled','disabled');
+				button.data('oldtxt', button.text()).text('Please wait, preparing your results...').attr('disabled','disabled');
 				$('form#pdf input[name="src"]').val(window.location.href.replace('completed','results'));
 				$('form#pdf').submit();
 				var resetButton = setInterval(function() {
@@ -745,6 +745,13 @@ if(Meteor.is_client) {
 				window.location.href = 'http://www.asiacloud.org/';
 			}
 		});
+		Template.assessment_finished.pdf_name = function() {
+				var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+				return 'acca-cat-' + assessment.application_name;
+		};
+		Template.assessment_finished.rendered = function() {
+			$('div#header').show();
+		};
 
 		Template.category_selection.events({
 			'change input#application_name': function(e) {
@@ -771,9 +778,18 @@ if(Meteor.is_client) {
 		});
 		Template.category_selection.rendered = function() {
 			$('input#application_name').focus();
+			$('div#header').show();
 		};
 		Template.category_selection.assessment = function() {
 			return Assessments.findOne({ _id: Session.get('assessment_id') });
+		};
+		Template.category_selection.application_name = function() {
+			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+			var title = 'ACCA Cloud Assessment Tool';
+			if(assessment.application_name)
+				title += ' - ' + assessment.application_name;
+			document.title = title;
+			return assessment.application_name;
 		};
 		Template.category_selection.category = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
@@ -795,11 +811,16 @@ if(Meteor.is_client) {
 		Template.category_evaluation.category = function() {
 			return this.category;
 		};
-
+		Template.category_results.last_page = function() {
+			console.log('called');
+		};
 		Template.category_results.category = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+			var assessment_stack = assessment.stack;
 			var category_name = this.category;
 			var category = _.find(assessment.data, function(datum) { return datum.category == category_name; });
+			var stack_idx = _.indexOf(assessment_stack, category_name, false);
+			if(assessment_stack[stack_idx + 1] == 'Completed') category.last_category = true;
 			return category;
 		};
 		Template.category_results.criteria_header = function() {
@@ -832,6 +853,16 @@ if(Meteor.is_client) {
 			$('div#header').hide();
 		};
 
+		Template.print_category_results.last_category = function() {
+			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+			var assessment_stack = assessment.stack;
+			var category_name = this.category;
+			var category = _.find(assessment.data, function(datum) { return datum.category == category_name; });
+			var stack_idx = _.indexOf(assessment_stack, category_name, false);
+			if(assessment_stack[stack_idx + 1] == 'Completed') return true;
+			return false;
+		};
+
 		Template.results.created = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
 			var results = [];
@@ -861,6 +892,14 @@ if(Meteor.is_client) {
 			'click div.next': function(e) {
 				var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
 				var assessment_stack = assessment.stack;
+				if(!assessment.application_name) {
+					alert('Please fill in an application name before proceeding.');
+					return true;
+				}
+				if(assessment_stack.length == 2) {
+					alert('Please select one or more categories before proceeding.');
+					return true;
+				}
 				var stack_idx = _.indexOf(assessment_stack, Session.get('current'), false);
 				stack_idx++;
 				if(stack_idx > assessment_stack.length - 1) stack_idx = assessment_stack.length - 1;
