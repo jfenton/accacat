@@ -80,13 +80,13 @@ if(Meteor.is_server) {
 		var simplesmtp = require('simplesmtp');
 		var MailComposer = require('mailcomposer').MailComposer;
 		var pool = simplesmtp.createClientPool(
-			465, // SMTP Port
-			'smtp.gmail.com',
+			587, // SMTP Port
+			'smtp.sendgrid.net',
 			{
 				secureConnection: true,
 				auth: {
-					user: 'jay.fenton@gmail.com',
-					pass: '!!3ndg@m3!!J13'
+					user: 'app11443580@heroku.com',
+					pass: 'b3dyxtya'
 				}
 			}
 		);
