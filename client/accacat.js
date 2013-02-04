@@ -407,6 +407,7 @@ if(Meteor.is_client) {
 				'description': 'Data Center physical infrastructure',
 				'onselectclear': 'table',
 				'criterialabel': 'cell',
+				'tlcell': 'Primary (across)<br/>Secondary (down)',
 				'notes': 'L4: This is the highest level for clouds and can be considered as the most robust and least prone for failures. This cloud is hosted primarily in a Tier 4 data center and backed up by either a Tier 4 or Tier 3 data center.  L3: This cloud is hosted in two Tier 3 data centers OR a combination of Tier 4 and Tier 2 data centers.  L2: This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.  L1: This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.',
 				'rows': [
 					{ 'title': 'Tier 4',
@@ -416,7 +417,6 @@ if(Meteor.is_client) {
 							{ 'title': 'Tier 3', 'cell': 'L4', 'description':'This is the highest level for clouds and can be considered as the most robust and least prone for failures. This cloud is hosted primarily in a Tier 4 data center and backed up by either a Tier 4 or Tier 3 data center.' },
 							{ 'title': 'Tier 2', 'cell': 'L3', 'description':'This cloud is hosted in two Tier 3 data centers OR a combination of Tier 4 and Tier 2 data centers.' },
 							{ 'title': 'Tier 1', 'cell': 'L2', 'description':'This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.' },
-							{ 'title': 'Local Redundancy', 'cell': 'L2', 'description':'This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.' }
 						]
 					},
 					{ 'title': 'Tier 3',
@@ -426,7 +426,6 @@ if(Meteor.is_client) {
 							{ 'title': 'Tier 3', 'cell': 'L3', 'description':'This cloud is hosted in two Tier 3 data centers OR a combination of Tier 4 and Tier 2 data centers.' },
 							{ 'title': 'Tier 2', 'cell': 'L2', 'description':'This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.' },
 							{ 'title': 'Tier 1', 'cell': 'L1', 'description':'This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.' },
-							{ 'title': 'Local Redundancy', 'cell': 'L1', 'description':'This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.' }
 						]
 					},
 					{ 'title': 'Tier 2',
@@ -436,7 +435,6 @@ if(Meteor.is_client) {
 							{ 'title': 'Tier 3', 'cell': 'L2', 'description':'This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.' },
 							{ 'title': 'Tier 2', 'cell': 'L1', 'description':'This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.' },
 							{ 'title': 'Tier 1', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' },
-							{ 'title': 'Local Redundancy', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' }
 						]
 					},
 					{ 'title': 'Tier 1',
@@ -446,7 +444,15 @@ if(Meteor.is_client) {
 							{ 'title': 'Tier 3', 'cell': 'L1', 'description':'This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.' },
 							{ 'title': 'Tier 2', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' },
 							{ 'title': 'Tier 1', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' },
-							{ 'title': 'Local Redundancy', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' }
+						]
+					},
+					{ 'title': 'Local Redundancy',
+						'description': '',
+						'cols': [
+							{ 'title': 'Tier 4', 'cell': 'L2', 'description':'This cloud is hosted in either a Tier 4 / Tier 1 data center OR Tier 3 / Tier 2 data center combinations. Local redundancy may also be considered when hosted in a Tier 4 data center.' },
+							{ 'title': 'Tier 3', 'cell': 'L1', 'description':'This is the lowest level and has higher risks of failure. This cloud is hosted in two Tier 2 data centers OR a combination of Tier 3 and Tier 1 data centers. Local redundancy may also be considered when hosted in a Tier 3 data center.' },
+							{ 'title': 'Tier 2', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' },
+							{ 'title': 'Tier 1', 'cell': 'Non-Carrier Grade', 'description':'This cloud is hosted in a non-Carrier-Grade environment and has the higest risk of failure.' },
 						]
 					}
 				]
@@ -981,6 +987,15 @@ if(Meteor.is_client) {
 				Assessments.update({ _id: Session.get('assessment_id') }, { $set: { 'data': assessment.data } });
 			}
 		});
+		Template.matrix.tlcell = function() {
+			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
+			var rows = {};
+			if(assessment) {
+				var current = this.category;
+				var datum = _.find(assessment.data, function(datum) { return datum.category == current; });
+				return datum.tlcell;
+			}
+		};
 		Template.matrix.row = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
 			var rows = {};
