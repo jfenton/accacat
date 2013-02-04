@@ -95,7 +95,7 @@ if(Meteor.is_server) {
 			email_assessment: function(assessment_id, application_name, to, subject, text) {
 				if(this.isSimulation) return true;
 				var client = new pdfcrowd.Pdfcrowd("acca", "e2bd9f496733f0b85f9a81178d8e4d2e");
-				client.convertURI('http://accacat.herokuapp.com/3d69c3cd-4e97-4721-9530-a5f8ea6e7316/results', {
+				client.convertURI('http://accacat.herokuapp.com/' + assessment_id + '/results', {
 					pdf: function(rstream) {
 						var wstream = fs.createWriteStream('tmp/' + assessment_id + '.pdf');
 						rstream.on('end', function() {
