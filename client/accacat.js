@@ -724,7 +724,8 @@ if(Meteor.is_client) {
 				$('form#pdf input[name="src"]').val(window.location.href.replace('completed','results'));
 				$('form#pdf').submit();
 				var resetButton = setInterval(function() {
-					button.text(button.data('oldtext')).attr('disabled','');
+					button.text(button.data('oldtxt')).removeAttr('disabled');
+					clearInterval(resetButton);
 				}, 10000);
 //			Router.navigate('/' + Session.get('assessment_id') + '/results', true);
 			},
