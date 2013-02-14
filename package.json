@@ -1,8 +1,7 @@
 {
-  "name": "accacat",
-  "version": "1.0.0",
-  "engines": {
-    "node": "0.8.18",
-    "npm":  "1.1.x"
-  }
+	"name": "accacat",
+	"version": "1.0.0",
+	"engines": {
+		"node": "0.8.18"
+	}
 }
