@@ -159,7 +159,7 @@
 			{{#each row}}
 			<tr>
 				{{#each col}}
-				<td id="{{rowtitle}}-{{coltitle}}" class="{{#if selectable}}choice{{/if}}{{#if cellsel}} sel{{/if}}{{#if first}}bold first{{/if}}">{{cell}}</td>
+				<td id="{{rowtitle}}-{{coltitle}}" class="{{#if selectable}}choice{{/if}}{{#if cellsel}} sel{{/if}}{{#if first}}bold first{{/if}}" title="{{description}}">{{cell}}</td>
 				{{/each}}
 			</tr>
 			{{/each}}

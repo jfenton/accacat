@@ -1007,7 +1007,7 @@ if(Meteor.is_client) {
 					_.each(row.cols, function(col) {
 						if(row.title) {
 							rows[row.title] = (rows[row.title] == undefined) ? [] : rows[row.title];
-							rows[row.title].push({ 'row': row.title, 'col':col.title, 'cell': col.cell, 'cellsel': col.cellsel });
+							rows[row.title].push({ 'row':row.title, 'col':col.title, 'cell':col.cell, 'cellsel':col.cellsel, 'description':col.description });
 						}
 					});
 				});
@@ -1040,6 +1040,7 @@ if(Meteor.is_client) {
 		Template.matrix.cell = function() { return this.cell; };
 		Template.matrix.coltitle = function() { return this.row; };
 		Template.matrix.rowtitle = function() { return this.col; };
+		Template.matrix.description = function() { return this.description; };
 		Template.matrix.selectable = function() { return this.col != undefined; };
 
 		var AccacatRouter = Backbone.Router.extend({
