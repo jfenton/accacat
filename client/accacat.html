@@ -31,6 +31,10 @@
 		ul, li {
 			list-style: none;
 		}
+		li.category {
+			cursor: hand;
+			cursor: pointer;
+		}
 		input[type="checkbox"] {
 			margin-right: 10px;
 		}
@@ -70,6 +74,8 @@
 		}
 		div#category_evaluation table tbody td.choice {
 			border: 1px solid #eeeeee;
+			cursor: hand;
+			cursor: pointer;
 		}
 		div#category_evaluation table tbody td.choice.sel {
 			color: white;
@@ -91,6 +97,8 @@
 		}
 		div.results table tbody td.choice {
 			background-color: white;
+			cursor: hand;
+			cursor: pointer;
 		}
 		div.results table tbody td.choice.sel {
 			color: white;
@@ -204,8 +212,8 @@
 			<li>Please select one or more of categories:</li>
 			{{#each category}}
 			<li class="category {{#if category_selected}}sel{{/if}}">
-				<div style="float: left; width: 17px; margin-left: 5px; font-family: Helvetica;">
-					{{#if category_selected}}&#x2714;{{else}}&nbsp;{{/if}}
+				<div style="float: left; width: 17px; margin-left: 5px; margin-right: 3px; font-family: Helvetica;">
+					<input type="checkbox" {{#if category_selected}}checked{{/if}}/>
 				</div>
 				<b>{{ category_title }}</b>: {{ category_description }} {{#if category_selected}}<div style="float:right;">(<span style="text-decoration: underline;">remove</span>)&nbsp;</div>{{/if}}</li>
 			{{/each}}
