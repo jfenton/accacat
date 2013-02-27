@@ -799,14 +799,17 @@ if(Meteor.is_client) {
 		Template.category_selection.application_name = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
 			var title = 'ACCA Cloud Assessment Tool';
-			if(assessment.application_name)
+			if(assessment && assessment.application_name) {
 				title += ' - ' + assessment.application_name;
-			document.title = title;
-			return assessment.application_name;
+				document.title = title;
+				return assessment.application_name;
+			} else {
+				return '';
+			}
 		};
 		Template.category_selection.category = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
-			return assessment.data;
+			if(assessment) return assessment.data;
 		};
 		Template.category_selection.category_title = function() {
 			return this.category;
@@ -825,7 +828,6 @@ if(Meteor.is_client) {
 			return this.category;
 		};
 		Template.category_results.last_page = function() {
-			console.log('called');
 		};
 		Template.category_results.category = function() {
 			var assessment = Assessments.findOne({ _id: Session.get('assessment_id') });
@@ -1075,7 +1077,7 @@ if(Meteor.is_client) {
 						_gaq.push(['_trackPageview', '/profiles']);
 						$(Meteor.render(function() { return Template.profile_selection({}); })).appendTo('div#page');
 					}
-				} else if(assessment_id.indexOf('-') > 0) {
+				} else if(assessment_id.length == 17) {
 					this.navigate('/' + assessment_id.replace('/','') + '/categories', true);
 				} else {
 					_gaq.push(['_trackPageview', '/assessment/new/' + assessment_id]);
