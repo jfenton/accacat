@@ -1,0 +1,3 @@
+
+Pdfcrowd = Npm.require("pdfcrowd");
+

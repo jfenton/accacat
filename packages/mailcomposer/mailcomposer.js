@@ -1,0 +1,3 @@
+
+MailComposer = Npm.require('mailcomposer');
+
